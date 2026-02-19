@@ -26,8 +26,12 @@ export default function FilterNewsPage({params}){
         newsContent = <NewsList  news={ news }/>
     }
 
-    if (selectedYear && !getAvailableNewsYears().includes(selectedYear) || !getAvailableNewsMonths(selectedMonth)){
-        throw new Error('Invalid Filter.');
+    if (
+    (selectedYear && !getAvailableNewsYears().includes(+selectedYear)) ||
+    (selectedMonth &&
+      !getAvailableNewsMonths(selectedYear).includes(+selectedMonth))
+    ) {
+      throw new Error('Invalid filter.');
     }
 
     return (<>
